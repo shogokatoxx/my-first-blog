@@ -8,17 +8,22 @@
     <div>
       <h1><a href="/">shogokatoblog</a></h1>
     </div>
+    <!-- これで項目の何が表示されるか指定できる -->
+    <!-- |linebreaksbrはpostのテキスト中の改行を段落に変換するフィルタに通す -->
+    {% for post in posts %}
+      <div>
+        <p>published: {{ post.published_date }}</p>
+        <h1><a href="">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+      </div>
+    {% endfor %}
 
-    <div>
-      <p>published:14.06.2014,12:14</p>
-      <h2><a href="">My First Post</a></h2>
-      <p>Aenean eu len quem.こんにちは！ よろしくお願いします！</p>
-    </div>
+    <!-- これでリストの中身を表示できるが項目のタイトルしか表示できていない -->
+    <!-- {% for post in posts %}
+      {{ post }}
+    {% endfor %} -->
 
-    <div>
-      <p>公開日:2014/06/14,12:14</p>
-      <h2><a href="">2番目の投稿</a></h2>
-      <p>こんにちは！よろしくお願いします！</p>
-    </div>
+    <!-- djangoはposts変数をオブジェクトのリストと認識してしまう -->
+    <!-- {{ posts }} -->
   </body>
 </html>
