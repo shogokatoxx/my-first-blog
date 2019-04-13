@@ -1,29 +1,12 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <title>shogokatoxx_blog</title>
-  </head>
-  <body>
-    <div>
-      <h1><a href="/">shogokatoblog</a></h1>
+{% extends 'blog/base.html' %}
+{% block content %}
+{% for post in posts %}
+  <div class="post">
+    <div class="date">
+      <p>published: {{ post.published_date }}</p>
     </div>
-    <!-- これで項目の何が表示されるか指定できる -->
-    <!-- |linebreaksbrはpostのテキスト中の改行を段落に変換するフィルタに通す -->
-    {% for post in posts %}
-      <div>
-        <p>published: {{ post.published_date }}</p>
-        <h1><a href="">{{ post.title }}</a></h1>
-        <p>{{ post.text|linebreaksbr }}</p>
-      </div>
-    {% endfor %}
-
-    <!-- これでリストの中身を表示できるが項目のタイトルしか表示できていない -->
-    <!-- {% for post in posts %}
-      {{ post }}
-    {% endfor %} -->
-
-    <!-- djangoはposts変数をオブジェクトのリストと認識してしまう -->
-    <!-- {{ posts }} -->
-  </body>
-</html>
+    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+    <p>{{ post.text|linebreaksbr }}</p>
+  </div>
+{% endfor %}
+{% endblock %}
